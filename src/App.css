@@ -1,0 +1,39 @@
+.App {
+  text-align: center;
+}
+
+.App header {
+  background-color: #123b71;
+  border-bottom: 8px solid #ffda85;
+  color: #eee;
+  padding: 80px;
+}
+
+.App header h2 {
+  margin-bottom: 80px;
+}
+
+.App header label {
+  display: block;
+}
+
+.App header .Input {
+  background: #eee;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 28px;
+  margin: 10px;
+  padding: 10px;
+  color: #333;
+}
+
+.App header .Input input {
+  background: none;
+  border: none;
+  font-size: 28px;
+  height: 40px;
+  margin: 0 4px;
+  padding: 0;
+  text-align: center;
+}
