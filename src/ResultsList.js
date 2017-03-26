@@ -6,8 +6,8 @@ class ResultsList extends Component {
   render() {
     let rows = [];
     if (this.props.results) {
-      for (const row of this.props.results) {
-        rows.push(<ResultsRow data={row} />)
+      for (let i = 0; i < this.props.results.length; i++) {
+        rows.push(<ResultsRow key={`row-${i}`} data={this.props.results[i]} index={i}/>)
       }
     }
 
@@ -15,7 +15,9 @@ class ResultsList extends Component {
     if (rows.length > 0) {
       labels = (
         <div className="Labels">
-          Add Value / # of Rides / New Balance
+          <span className="col">Add Value</span>
+          <span className="col"># of Rides</span>
+          <span className="col">New Balance</span>
         </div>
       );
     }

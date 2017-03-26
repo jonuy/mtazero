@@ -1,0 +1,29 @@
+.ResultsRow {
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 2px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 450px;
+  padding: 8px 4px;
+}
+
+.ResultsRow .col {
+  flex-grow: 1;
+  max-width: 150px;
+}
+
+.ResultsRow .AddValue {
+  color: #123b71;
+}
+
+.ResultsRow-appear {
+  opacity: 0.01;
+}
+
+.ResultsRow-appear.ResultsRow-appear-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
