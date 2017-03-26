@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import ResultsList from './ResultsList';
 
 class App extends Component {
 
@@ -22,14 +23,26 @@ class App extends Component {
           <div className="Input">
             <span>$</span>
             <input
-              type="text"
+              type="number"
               name="cardValue"
               placeholder="0.00"
-              onChange={this.onInputChange.bind(this)} />
+              onBlur={this.onInputBlur.bind(this)}
+              onChange={this.onInputChange.bind(this)}
+              onFocus={this.onInputFocus.bind(this)} />
           </div>
         </header>
+        <ResultsList results={this.state.results} />
       </div>
     );
+  }
+
+  /**
+   * Input onBlur handler.
+   *
+   * @param event {object}
+   */
+  onInputBlur(event) {
+    event.target.placeholder = '0.00';
   }
 
   /**
@@ -53,6 +66,15 @@ class App extends Component {
   }
 
   /**
+   * Input onFocus handler.
+   *
+   * @param event {object}
+   */
+  onInputFocus(event) {
+    event.target.placeholder = '';
+  }
+
+  /**
    * Calculate and save results to the component state.
    *
    * @param cardValue {number}
@@ -70,14 +92,16 @@ class App extends Component {
       const result = {
         addValue: ((newTotal - cardValue) / BONUS).toFixed(2),
         numRides: newTotal / FARE,
-        newTotal: newTotal,
+        newTotal: newTotal.toFixed(2),
       };
+
+      // No bonus on adds below $5.50. Just gonna ignore these scenarios.
+      if (result.addValue < 5.5) {
+        continue;
+      }
 
       results.push(result);
     }
-
-    console.log(results);
-    console.log('----------------');
 
     this.setState({results: results});
   }
