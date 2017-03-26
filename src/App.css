@@ -9,8 +9,23 @@
   padding: 80px 40px;
 }
 
+@media screen and (max-width: 450px) {
+  .App header {
+    padding: 80px 20px;
+  }
+}
+
+.App header a {
+  color: #ffda85;
+  display: block;
+  font-size: 12px;
+  margin: 40px 0;
+}
+
 .App header h2 {
-  margin-bottom: 80px;
+  font-size: 32px;
+  margin: auto;
+  max-width: 500px;
 }
 
 .App header label {
@@ -44,4 +59,20 @@
 .App header .Input input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.App footer {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.App footer a {
+  color: #7e7e7e;
+  font-size: 12px;
+}
+
+.App footer.noContent {
+  bottom: 20px;
+  margin-bottom: 0;
+  position: absolute;
 }

@@ -3,6 +3,16 @@ import ResultsRow from './ResultsRow';
 import './ResultsList.css';
 
 class ResultsList extends Component {
+
+  constructor() {
+    super();
+
+    this.state = {
+      // Flag to keep
+      didDisplay: false,
+    };
+  }
+
   render() {
     let rows = [];
     if (this.props.results) {
@@ -12,7 +22,7 @@ class ResultsList extends Component {
     }
 
     let labels;
-    if (rows.length > 0) {
+    if (rows.length > 0 || this.state.didDisplay) {
       labels = (
         <div className="Labels">
           <span className="col">Add Value</span>
@@ -29,6 +39,16 @@ class ResultsList extends Component {
       </div>
     );
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.results && this.props.results.length > 0) {
+      this.setState({didDisplay: true});
+    }
+  }
 }
+
+ResultsList.propTypes = {
+  results: React.PropTypes.array,
+};
 
 export default ResultsList;

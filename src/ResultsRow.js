@@ -19,4 +19,12 @@ class ResultsRow extends Component {
   }
 }
 
+ResultsRow.propTypes = {
+  data: React.PropTypes.shape({
+    addValue: React.PropTypes.number,
+    newTotal: React.PropTypes.number,
+    numRides: React.PropTypes.number,
+  }),
+};
+
 export default ResultsRow;

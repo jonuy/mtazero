@@ -13,12 +13,18 @@ class App extends Component {
   }
 
   render() {
+    let footer = (
+      <footer className={ ! this.state.results || this.state.results.length === 0 ? 'noContent' : '' }>
+        <a href="https://github.com/jonuy/mtazero">on the Githubs.</a>
+      </footer>
+    );
+
     return (
       <div className="App">
 
         <header>
           <h2>Let's get that MTA card trending back to $0</h2>
-
+          <a href="http://web.mta.info/nyct/fare/NewFareInformation.htm">MTA Fare Info</a>
           <label>How much is on your card?</label>
           <div className="Input">
             <span>$</span>
@@ -32,6 +38,7 @@ class App extends Component {
           </div>
         </header>
         <ResultsList results={this.state.results} />
+        { footer }
       </div>
     );
   }
@@ -51,6 +58,9 @@ class App extends Component {
    * @param event {object}
    */
   onInputChange(event) {
+    // Clears current set of results
+    this.setState({results: undefined});
+
     if (! event.target.value) {
       return;
     }
@@ -62,7 +72,10 @@ class App extends Component {
     newValue = parseFloat(newValue);
 
     // Do the thing
-    this.calculateResults(newValue);
+    const results = this.calculateResults(newValue);
+
+    // Artificial delay
+    setTimeout((function() {this.setState({results: results}); }).bind(this), 100);
   }
 
   /**
@@ -78,6 +91,7 @@ class App extends Component {
    * Calculate and save results to the component state.
    *
    * @param cardValue {number}
+   * @return {array}
    */
   calculateResults(cardValue) {
     let results = [];
@@ -103,7 +117,7 @@ class App extends Component {
       results.push(result);
     }
 
-    this.setState({results: results});
+    return results;
   }
 }
 
