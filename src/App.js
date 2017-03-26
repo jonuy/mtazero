@@ -97,24 +97,37 @@ class App extends Component {
     let results = [];
 
     const BONUS = 1.05;
+    const BONUS_LIMIT = 5.5;
     const FARE = 2.75;
+    const NUM_RESULTS = 8;
 
-    for (let x = 1; x <= 60; x++) {
-      const newTotal = FARE * x;
-      if (newTotal < cardValue) { continue; }
+    let iteration = 1;
+    while (results.length < NUM_RESULTS) {
+      const newTotal = (FARE * iteration).toFixed(2);
+      const addValue = ((newTotal - cardValue) / BONUS).toFixed(2);
+      const numRides = newTotal / FARE;
 
-      const result = {
-        addValue: ((newTotal - cardValue) / BONUS).toFixed(2),
-        numRides: newTotal / FARE,
-        newTotal: newTotal.toFixed(2),
-      };
-
-      // No bonus on adds below $5.50. Just gonna ignore these scenarios.
-      if (result.addValue < 5.5) {
+      if (newTotal < cardValue ||
+          // No bonus on adds below $5.50. Just gonna ignore these scenarios.
+          addValue < BONUS_LIMIT ||
+          // Other than the first two results, just show even numbered rides
+          (results.length > 1 && numRides % 2 !== 0)
+          ) {
+        iteration++;
         continue;
       }
+      else {
+        // First two results showing the lowest refill amounts
+        if (results.length <= 1) {
+          iteration++;
+        }
+        // Then skip to iterations by 4
+        else {
+          iteration += 4;
+        }
 
-      results.push(result);
+        results.push({addValue, newTotal, numRides});
+      }
     }
 
     return results;

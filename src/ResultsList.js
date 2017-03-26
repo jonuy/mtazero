@@ -25,7 +25,7 @@ class ResultsList extends Component {
     if (rows.length > 0 || this.state.didDisplay) {
       labels = (
         <div className="Labels">
-          <span className="col">Add Value</span>
+          <span className="col">Refill Amount</span>
           <span className="col"># of Rides</span>
           <span className="col">New Balance</span>
         </div>
