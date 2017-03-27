@@ -8,13 +8,19 @@ class App extends Component {
     super();
 
     this.state = {
+      hasInputFocus: false,
       results: undefined,
     };
   }
 
   render() {
+    let footerClass;
+    if (! this.state.hasInputFocus && (! this.state.results || this.state.results.length === 0)) {
+      footerClass = 'noContent';
+    }
+
     let footer = (
-      <footer className={ ! this.state.results || this.state.results.length === 0 ? 'noContent' : '' }>
+      <footer className={ footerClass }>
         <a href="https://github.com/jonuy/mtazero">on the Githubs.</a>
       </footer>
     );
@@ -50,6 +56,7 @@ class App extends Component {
    */
   onInputBlur(event) {
     event.target.placeholder = '0.00';
+    this.setState({hasInputFocus: false});
   }
 
   /**
@@ -85,6 +92,7 @@ class App extends Component {
    */
   onInputFocus(event) {
     event.target.placeholder = '';
+    this.setState({hasInputFocus: true});
   }
 
   /**

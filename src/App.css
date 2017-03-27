@@ -17,7 +17,7 @@
 
 .App header a {
   color: #ffda85;
-  display: block;
+  display: inline-block;
   font-size: 12px;
   margin: 40px 0;
 }
